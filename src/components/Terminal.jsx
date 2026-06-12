@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "../context/ThemeContext"
-import { FaTerminal, FaTimes, FaMinus, FaExternalLinkAlt } from "react-icons/fa"
+import { FaTerminal, FaTimes } from "react-icons/fa"
 
 const Terminal = ({ isOpen, onClose }) => {
-    const { theme, setTheme } = useTheme()
+    const { setTheme } = useTheme()
     const [input, setInput] = useState("")
     const [history, setHistory] = useState([
         { type: "info", content: "Welcome to Tanmoy's System Terminal [Version 2.0.4]" },
@@ -108,7 +108,7 @@ const Terminal = ({ isOpen, onClose }) => {
                         }
                     }
                     break
-                case "theme":
+                case "theme": {
                     const themes = ["midnight", "solar", "cosmic", "emerald"]
                     if (!args[0]) {
                         newHistory.push({ type: "info", content: `Available themes: ${themes.join(", ")}` })
@@ -119,6 +119,7 @@ const Terminal = ({ isOpen, onClose }) => {
                         newHistory.push({ type: "error", content: `theme: calibration failed for '${args[0]}'` })
                     }
                     break
+                }
                 case "clear":
                     setHistory([])
                     setInput("")
@@ -215,7 +216,7 @@ const Terminal = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
                             <div className="hidden sm:flex items-center gap-6">
-                                <div className="text-[10px] text-zinc-600 font-mono">CPU: {Math.floor(Math.random() * 5) + 2}.4%</div>
+                                <div className="text-[10px] text-zinc-600 font-mono">CPU: {useMemo(() => `${Math.floor(Math.random() * 5) + 2}.4%`, [])}</div>
                                 <div className="text-[10px] text-zinc-600 font-mono">RAM: {hackActive ? "OVERFLOW" : "512MB"}</div>
                                 <button onClick={onClose} className="text-zinc-500 hover:text-white transition-colors">
                                     <FaTimes />

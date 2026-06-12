@@ -14,7 +14,14 @@ const CopyButton = ({ value, children, label }) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(value)
+    navigator.clipboard.writeText(value).catch(() => {
+      const textArea = document.createElement('textarea')
+      textArea.value = value
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+    })
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -53,10 +60,10 @@ const Contact = () => {
     // 3. Replace the strings below with your actual IDs.
 
     emailjs.sendForm(
-      'service_ex430dd',   // Planet-scale or Gmail service ID
-      'template_ivyvwoh',  // The ID of your email template
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       formRef.current,
-      'JMv5XTc7dVZpMvged'    // Found in Account > API Keys
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     )
       .then((result) => {
         console.log("Email successfully sent!", result.text)
@@ -148,8 +155,9 @@ const Contact = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Name</label>
+                <label htmlFor="user_name" className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Name</label>
                 <input
+                  id="user_name"
                   type="text"
                   name="user_name"
                   required
@@ -158,8 +166,9 @@ const Contact = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Email</label>
+                <label htmlFor="user_email" className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Email</label>
                 <input
+                  id="user_email"
                   type="email"
                   name="user_email"
                   required
@@ -170,8 +179,9 @@ const Contact = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Message</label>
+              <label htmlFor="message" className="text-xs font-bold [color:var(--text-secondary)] uppercase tracking-widest ml-1 opacity-60">Message</label>
               <textarea
+                id="message"
                 name="message"
                 required
                 rows="5"

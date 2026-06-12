@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, memo } from "react"
-import profilePicture from "../assets/TanmoyDebnathProfileNew.webp"
+import { useRef, memo } from "react"
+
 import { HERO_CONTENT } from "../constants"
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
@@ -13,21 +13,7 @@ import GsapReveal from "./GsapReveal"
 
 
 
-const containerVariants = {
-  hidden: { opacity: 0, x: -100 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      staggerChildren: 0.5
-    }
-  }
-}
-const ChildVariants = {
-  hidden: { x: -100, opacity: 0 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-}
+
 
 // Theme-specific decorative elements - optimized for performance
 const ThemeDecoration = ({ theme, isLowPerf }) => {
@@ -306,8 +292,8 @@ const Hero = () => {
             <div>
               <Magnetic>
                 <a
-                  href="/Resume (4).pdf"
-                  target="blank"
+                  href="/TanmoyDebnath_Resume.pdf"
+                  target="_blank"
                   rel="noopener noreferrer"
                   download
                   className="rounded-full px-8 md:px-10 py-3 md:py-4 text-sm md:text-base font-semibold transition-all duration-300 shadow-xl active:scale-95 [background-color:var(--text-primary)] [color:var(--bg-primary)] hover:[background-color:var(--accent)] hover:text-white inline-block cursor-none"

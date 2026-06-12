@@ -383,7 +383,7 @@ const Footer = () => {
                         © {currentYear} Tanmoy Debnath
                     </p>
                     <p className={`text-xs [color:var(--text-secondary)] ${isSolar ? 'opacity-80' : 'opacity-50'} flex items-center gap-1`}>
-                        Made with <FaHeart className="text-red-500 text-[10px]" /> & <span className="[color:var(--accent)]">lot's of coffee</span>
+                        Made with <FaHeart className="text-red-500 text-[10px]" /> & <span className="[color:var(--accent)]">lots of coffee</span>
                     </p>
                 </div>
             </div>

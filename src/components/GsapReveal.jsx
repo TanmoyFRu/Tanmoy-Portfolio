@@ -3,7 +3,8 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
 
-gsap.registerPlugin(ScrollTrigger)
+
+
 
 const GsapReveal = ({ children, delay = 0, duration = 1.2, y = 50, x = 0, skewY = 0, stagger = 0.1, scrub = false, start = "top 90%", className = "" }) => {
     const containerRef = useRef()

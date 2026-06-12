@@ -79,7 +79,7 @@ export const EDUCATION = [
 
 
 export const CONTACT = {
-  address: "Barjala, Agartala, Tripura 799002 ",
-  phoneNo: "+91 87941 40550 ",
+  address: "Barjala, Agartala, Tripura 799002",
+  phoneNo: "+91 87941 40550",
   email: "tanmoydn2003@gmail.com",
 };

@@ -16,13 +16,13 @@ import SectionNav from "./components/SectionNav"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Lenis from "lenis"
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion"
-import { FaTerminal } from "react-icons/fa"
+
 import Magnetic from "./components/Magnetic"
 import Terminal from "./components/Terminal"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger)
+
 
 const App = () => {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
@@ -49,15 +49,16 @@ const App = () => {
     // Sync Lenis with GSAP's ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
-    gsap.ticker.add((time) => {
+    const tickerCallback = (time) => {
       lenis.raf(time * 1000)
-    })
+    }
+    gsap.ticker.add(tickerCallback)
 
     gsap.ticker.lagSmoothing(0)
 
     return () => {
       lenis.destroy()
-      gsap.ticker.remove(lenis.raf)
+      gsap.ticker.remove(tickerCallback)
     }
   }, [])
 

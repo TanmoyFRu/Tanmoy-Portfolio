@@ -1,0 +1,229 @@
+%-------------------------
+% Resume in Latex
+% License : MIT
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Tanmoy Debnath}
+\newcommand{\phone}{8794140550}
+\newcommand{\emaila}{tanmoydn2003@gmail.com}
+\newcommand{\github}{TanmoyFRu}
+\newcommand{\linkedin}{tanmoy-debnath}
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+%----------HEADING-----------------
+
+{
+\begin{tabularx}{\linewidth}{L r} \\
+  \textbf{\Large \name} & {\raisebox{0.0\height}{\footnotesize \faPhone}\ +91-\phone}\\
+  {Backend \& Automation Engineer} & \href{mailto:\emaila}{\raisebox{0.0\height}{\footnotesize \faEnvelope}\ {\emaila}} \\
+  {Bachelor of Technology in Computer Science and Engineering} & \href{https://github.com/\github}{\raisebox{0.0\height}{\footnotesize \faGithub}\ {github.com/\github}} \\
+  {Techno College of Engineering Agartala} & \href{https://www.linkedin.com/in/\linkedin/}{\raisebox{0.0\height}{\footnotesize \faLinkedin}\ {linkedin.com/in/\linkedin}}
+\end{tabularx}
+}
+
+
+%-----------EDUCATION-----------
+\section{\textbf{Education}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Bachelor of Technology in Computer Science and Engineering}{}
+      {Techno College of Engineering Agartala}{2021 -- 2025}
+  \resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+%-----------EXPERIENCE-----------------
+\section{\textbf{Experience}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Automation Engineer \& Backend Developer}{Onsite}
+      {Yupcha}{Sep 2025 -- Present}
+      \vspace{-2.0mm}
+      \resumeItemListStart
+        \item {Spearheaded automated CI/CD pipelines using GitHub Actions and Docker, accelerating deployment velocity by 40\% and ensuring 100\% zero-downtime releases.}
+        \item {Pioneered computer vision pipelines leveraging PyTorch and YOLOv8 to process 50k+ images daily with 95\% classification accuracy for autonomous systems.}
+        \item {Streamlined RESTful API endpoints using FastAPI and PostgreSQL indexing, sustaining 50k+ daily requests with sub-50ms latency metrics.}
+        \item {Maximized system reliability by deploying high-availability protocols and monitoring, increasing uptime to 99.9\% while cutting resource consumption by 25\%.}
+        \item {Authored event-driven Python automation modules to synchronize real-time data across distributed services, boosting system throughput by 35\%.}
+      \resumeItemListEnd
+
+    \vspace{-3.0mm}
+
+  \resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+%-----------PROJECTS-----------------
+\section{\textbf{Projects}}
+\resumeSubHeadingListStart
+    \resumeProject
+      {Blockchain Certificate Verifier (Cyphire)}
+      {Platform for issuing immutable, digitally-signed certificates anchored on the Polygon blockchain.}
+      {2026}
+      {\href{https://github.com/TanmoyFRu/Blockchain-Certificate-Verifier}{\faGithub\ GitHub}}
+
+      \resumeItemListStart
+        \item {Forged custom Solidity smart contracts on Polygon network, facilitating immutable record-keeping and instant verification for 1,000+ certificates.}
+        \item {Engineered asynchronous Web3.py middleware within a FastAPI architecture, slashing blockchain transaction latency by over 90\%.}
+        \item {Codified a dual-verification protocol synchronizing PostgreSQL databases with Polygon blockchain consensus to guarantee 100\% data integrity.}
+      \resumeItemListEnd
+      \vspace{-2mm}
+
+    \resumeProject
+      {Link Ingestor API}
+      {High-performance autonomous system for large-scale webpage data ingestion with async processing architecture.}
+      {2025}
+      {\href{https://github.com/TanmoyFRu/Link-Ingestor-API}{\faGithub\ GitHub}}
+
+      \resumeItemListStart
+        \item {Engineered autonomous web crawling modules using Bing Search API and BeautifulSoup, achieving 100\% automation of data extraction workflows.}
+        \item {Deployed distributed task queues using Celery and Redis to balance 200+ concurrent ingestion streams, eliminating architectural bottlenecks.}
+        \item {Parallelized data ingestion flows via multi-threaded execution, reducing average page processing time by 60\% for high-traffic environments.}
+      \resumeItemListEnd
+      \vspace{-2mm}
+
+    \resumeProject
+      {ChatApp Backend}
+      {Scalable messaging backend integrated with Google Gemini AI for real-time intelligent responses.}
+      {2023}
+      {\href{https://github.com/TanmoyFRu/ChatApp-Backend}{\faGithub\ GitHub}}
+
+      \resumeItemListStart
+        \item {Interfaced Google Gemini AI with high-frequency WebSocket protocols to deliver contextually-aware responses, elevating user interaction metrics by 50\%.}
+        \item {Devised non-blocking inference pipelines using Celery and RabbitMQ to manage AI tasks, guaranteeing sub-second response times for 20,000+ daily sessions.}
+        \item {Overhauled relational schemas for high-frequency message logging, enabling rapid retrieval from a dataset of 100k+ historical message records.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-8.5mm}
+
+%-----------Technical skills-----------------
+\section{\textbf{Technical Skills}}
+ \begin{itemize}[leftmargin=0.05in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, JavaScript, SQL, C/C++, Solidity, HTML/CSS} \\
+     \textbf{Backend \& Frameworks}{: FastAPI, Node.js, WebSockets, REST APIs, Celery} \\
+     \textbf{Machine Learning}{: PyTorch, YOLOv8, ResNet, Computer Vision} \\
+     \textbf{Databases \& Storage}{: PostgreSQL, Redis, MongoDB, SQLAlchemy, SQLite} \\
+     \textbf{DevOps \& Cloud}{: CI/CD Pipelines, GitHub Actions, Docker, Linux, Git} \\
+     \textbf{Blockchain}{: Web3.py, Smart Contracts, Polygon (EVM), Decentralized Verification} \\
+      \textbf{Tools}{: RabbitMQ, Postman, VSCode, Bash/Linux Terminal, Distributed Systems} \\
+    }}
+ \end{itemize}
+
+ \vspace{-16pt}
+
+
+%-------------------------------------------
+\end{document}

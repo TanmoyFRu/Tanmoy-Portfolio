@@ -18,7 +18,8 @@ const ProjectItem = memo(({ project, index }) => {
   })
 
   // Smooth parallax values
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [-50, 50]), { stiffness: 100, damping: 30 })
+  const rawY = useTransform(scrollYProgress, [0, 1], [-50, 50])
+  useSpring(rawY, { stiffness: 100, damping: 30 })
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1])
 

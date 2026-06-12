@@ -28,16 +28,7 @@ const ScrollToTop = () => {
     })
   }
 
-  // Theme-specific glow colors
-  const getThemeGlow = () => {
-    switch (theme) {
-      case 'emerald': return 'hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]'
-      case 'solar': return 'hover:shadow-[0_0_20px_rgba(255,140,0,0.4)]'
-      case 'cosmic': return 'hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]'
-      case 'midnight':
-      default: return 'hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]'
-    }
-  }
+
 
   return (
     <AnimatePresence>

@@ -50,6 +50,8 @@ const LocalTime = memo(() => {
   return <p className="[color:var(--text-primary)] text-sm font-mono">{formattedTime}</p>
 })
 
+LocalTime.displayName = "LocalTime"
+
 // Theme-specific decoration icon for stats
 const ThemeIcon = ({ theme }) => {
   const iconClass = "text-[8px] [color:var(--accent)] opacity-60"
@@ -66,7 +68,7 @@ const About = () => {
   const { theme } = useTheme()
 
   // Calculate experience dynamically from start date (September 2025)
-  const startDate = new Date(2025, 8, 1) // September 2025 (month is 0-indexed)
+  const startDate = new Date(2024, 8, 1) // September 2025 (month is 0-indexed)
   const now = new Date()
   const experienceMonths = Math.floor((now - startDate) / (1000 * 60 * 60 * 24 * 30))
 
