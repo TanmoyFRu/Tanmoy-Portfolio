@@ -103,9 +103,9 @@ const App = () => {
 
         <div className="fixed inset-0 -z-10 bg-radial-gradient h-full w-full" />
 
-        <div className="container mx-auto">
-          <Navbar onTerminalToggle={() => setIsTerminalOpen(true)} />
+        <Navbar onTerminalToggle={() => setIsTerminalOpen(true)} />
 
+        <div className="container mx-auto">
           <div className="px-8">
             <div id="hero">
               <Hero />

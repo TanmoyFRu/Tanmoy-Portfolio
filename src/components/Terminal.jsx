@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "../context/ThemeContext"
 import { FaTerminal, FaTimes } from "react-icons/fa"
@@ -17,6 +17,7 @@ const Terminal = ({ isOpen, onClose }) => {
     const [bootLines, setBootLines] = useState([])
     const scrollRef = useRef(null)
     const inputRef = useRef(null)
+    const cpuUsage = useRef(`${Math.floor(Math.random() * 5) + 2}.4%`)
 
     useEffect(() => {
         if (isOpen) {
@@ -216,7 +217,7 @@ const Terminal = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
                             <div className="hidden sm:flex items-center gap-6">
-                                <div className="text-[10px] text-zinc-600 font-mono">CPU: {useMemo(() => `${Math.floor(Math.random() * 5) + 2}.4%`, [])}</div>
+                                <div className="text-[10px] text-zinc-600 font-mono">CPU: {cpuUsage.current}</div>
                                 <div className="text-[10px] text-zinc-600 font-mono">RAM: {hackActive ? "OVERFLOW" : "512MB"}</div>
                                 <button onClick={onClose} className="text-zinc-500 hover:text-white transition-colors">
                                     <FaTimes />

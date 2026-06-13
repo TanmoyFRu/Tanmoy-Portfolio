@@ -1,6 +1,7 @@
 import linkMinimal from "../assets/projects/link-ingestor-v2.webp";
 import chatMinimal from "../assets/projects/chat-backend-v2.webp";
 import project4 from "../assets/projects/blog-auth-v2.webp";
+import cyphireImg from "../assets/projects/cyphire-v2.webp";
 import yupchaLogo from "../assets/yupcha_logo.webp";
 import collegeLogo from "../assets/college logo.webp";
 
@@ -13,7 +14,7 @@ With a strong foundation in ResNet architectures and DevOps practices (Docker, K
 
 export const EXPERIENCES = [
   {
-    year: "Sept 2024 - Present",
+    year: "Sept 2025 - Jun 2026",
     role: "Automation Engineer & Backend Developer",
     company: "Yupcha",
     logo: yupchaLogo,
@@ -32,6 +33,14 @@ export const EXPERIENCES = [
 
 
 export const PROJECTS = [
+  {
+    title: "Cyphire",
+    image: cyphireImg,
+    description:
+      "An immutable platform for digitally-signed credentials anchored on the Polygon blockchain. Backend services integrate FastAPI with Web3.py for secure blockchain transactions, async processing, and fault-tolerant API design.",
+    technologies: ["FastAPI", "Web3.py", "Polygon", "PostgreSQL", "Solidity"],
+    github: "https://github.com/TanmoyFRu/Cyphire",
+  },
   {
     title: "Link Ingestor API",
     image: linkMinimal,

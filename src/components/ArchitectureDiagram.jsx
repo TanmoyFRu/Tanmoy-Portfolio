@@ -125,123 +125,164 @@ const architectures = {
     'Link Ingestor API': {
         nodes: [
             {
-                id: 'client', type: 'custom', position: { x: 100, y: 0 },
+                id: 'client', type: 'custom', position: { x: 150, y: 0 },
                 data: { label: 'HTTP Client', sublabel: 'Request', icon: 'network', color: 'info', delay: 0 }
             },
             {
-                id: 'fastapi', type: 'custom', position: { x: 100, y: 70 },
-                data: { label: 'FastAPI', sublabel: 'Gateway', icon: 'api', color: 'primary', delay: 0.1 }
+                id: 'fastapi', type: 'custom', position: { x: 150, y: 90 },
+                data: { label: 'FastAPI', sublabel: 'REST Gateway', icon: 'api', color: 'primary', delay: 0.1 }
             },
             {
-                id: 'redis', type: 'custom', position: { x: 20, y: 140 },
-                data: { label: 'Redis', sublabel: 'Queue', icon: 'cache', color: 'danger', delay: 0.2 }
+                id: 'postgres', type: 'custom', position: { x: 350, y: 90 },
+                data: { label: 'PostgreSQL', sublabel: 'Storage', icon: 'database', color: 'secondary', delay: 0.15 }
             },
             {
-                id: 'postgres', type: 'custom', position: { x: 180, y: 140 },
-                data: { label: 'PostgreSQL', sublabel: 'Storage', icon: 'database', color: 'secondary', delay: 0.2 }
+                id: 'redis', type: 'custom', position: { x: 0, y: 180 },
+                data: { label: 'Redis', sublabel: 'Cache/Results', icon: 'cache', color: 'danger', delay: 0.2 }
             },
             {
-                id: 'celery', type: 'custom', position: { x: 100, y: 210 },
-                data: { label: 'Celery', sublabel: 'Workers', icon: 'worker', color: 'accent', delay: 0.3 }
+                id: 'rabbitmq', type: 'custom', position: { x: 300, y: 180 },
+                data: { label: 'RabbitMQ', sublabel: 'Message Broker', icon: 'network', color: 'warning', delay: 0.2 }
             },
             {
-                id: 'bing', type: 'custom', position: { x: 20, y: 280 },
-                data: { label: 'Bing API', sublabel: 'Search', icon: 'search', color: 'info', delay: 0.4 }
+                id: 'celery', type: 'custom', position: { x: 150, y: 270 },
+                data: { label: 'Celery', sublabel: '200+ Workers', icon: 'worker', color: 'accent', delay: 0.3 }
             },
             {
-                id: 'prometheus', type: 'custom', position: { x: 180, y: 280 },
-                data: { label: 'Prometheus', sublabel: 'Metrics', icon: 'monitor', color: 'warning', delay: 0.4 }
+                id: 'scraper', type: 'custom', position: { x: 150, y: 360 },
+                data: { label: 'Ingestion', sublabel: 'Retry/Backoff', icon: 'search', color: 'info', delay: 0.4 }
             },
         ],
         edges: [
             { id: 'e1', source: 'client', target: 'fastapi' },
-            { id: 'e2', source: 'fastapi', target: 'redis' },
-            { id: 'e3', source: 'fastapi', target: 'postgres' },
-            { id: 'e4', source: 'redis', target: 'celery' },
-            { id: 'e5', source: 'postgres', target: 'celery' },
-            { id: 'e6', source: 'celery', target: 'bing' },
-            { id: 'e7', source: 'celery', target: 'prometheus' },
+            { id: 'e2', source: 'fastapi', target: 'postgres' },
+            { id: 'e3', source: 'fastapi', target: 'redis' },
+            { id: 'e4', source: 'fastapi', target: 'rabbitmq' },
+            { id: 'e5', source: 'rabbitmq', target: 'celery' },
+            { id: 'e6', source: 'redis', target: 'celery' },
+            { id: 'e7', source: 'celery', target: 'scraper' },
         ]
     },
     'ChatApp Backend': {
         nodes: [
             {
-                id: 'user', type: 'custom', position: { x: 100, y: 0 },
+                id: 'user', type: 'custom', position: { x: 150, y: 0 },
                 data: { label: 'User', sublabel: 'Client', icon: 'user', color: 'info', delay: 0 }
             },
             {
-                id: 'fastapi', type: 'custom', position: { x: 100, y: 70 },
-                data: { label: 'FastAPI', sublabel: 'Chat API', icon: 'api', color: 'primary', delay: 0.1 }
+                id: 'websocket', type: 'custom', position: { x: 150, y: 90 },
+                data: { label: 'WebSocket', sublabel: 'Real-time', icon: 'network', color: 'primary', delay: 0.1 }
             },
             {
-                id: 'jwt', type: 'custom', position: { x: 220, y: 70 },
-                data: { label: 'JWT Auth', sublabel: 'Security', icon: 'auth', color: 'danger', delay: 0.15 }
+                id: 'jwt', type: 'custom', position: { x: 350, y: 90 },
+                data: { label: 'JWT Auth', sublabel: 'Handshake', icon: 'auth', color: 'danger', delay: 0.15 }
             },
             {
-                id: 'redis', type: 'custom', position: { x: 20, y: 140 },
-                data: { label: 'Redis', sublabel: 'Broker', icon: 'cache', color: 'danger', delay: 0.2 }
+                id: 'fastapi', type: 'custom', position: { x: 150, y: 180 },
+                data: { label: 'FastAPI', sublabel: 'Chat API', icon: 'api', color: 'primary', delay: 0.2 }
             },
             {
-                id: 'postgres', type: 'custom', position: { x: 180, y: 140 },
-                data: { label: 'PostgreSQL', sublabel: 'Messages', icon: 'database', color: 'secondary', delay: 0.2 }
+                id: 'rabbitmq', type: 'custom', position: { x: 350, y: 180 },
+                data: { label: 'RabbitMQ', sublabel: 'Message Queue', icon: 'network', color: 'warning', delay: 0.2 }
             },
             {
-                id: 'celery', type: 'custom', position: { x: 100, y: 210 },
-                data: { label: 'Celery', sublabel: 'Tasks', icon: 'worker', color: 'accent', delay: 0.3 }
+                id: 'postgres', type: 'custom', position: { x: 0, y: 270 },
+                data: { label: 'PostgreSQL', sublabel: 'Messages', icon: 'database', color: 'secondary', delay: 0.3 }
             },
             {
-                id: 'gemini', type: 'custom', position: { x: 100, y: 280 },
-                data: { label: 'Gemini AI', sublabel: 'Response', icon: 'ai', color: 'warning', delay: 0.4 }
+                id: 'celery', type: 'custom', position: { x: 300, y: 270 },
+                data: { label: 'Celery', sublabel: '20k+ Requests', icon: 'worker', color: 'accent', delay: 0.3 }
             },
         ],
         edges: [
-            { id: 'e1', source: 'user', target: 'fastapi' },
-            { id: 'e2', source: 'fastapi', target: 'jwt' },
-            { id: 'e3', source: 'fastapi', target: 'redis' },
-            { id: 'e4', source: 'fastapi', target: 'postgres' },
-            { id: 'e5', source: 'redis', target: 'celery' },
-            { id: 'e6', source: 'celery', target: 'gemini' },
-            { id: 'e7', source: 'postgres', target: 'gemini' },
+            { id: 'e1', source: 'user', target: 'websocket' },
+            { id: 'e2', source: 'websocket', target: 'jwt' },
+            { id: 'e3', source: 'websocket', target: 'fastapi' },
+            { id: 'e4', source: 'fastapi', target: 'rabbitmq' },
+            { id: 'e5', source: 'fastapi', target: 'postgres' },
+            { id: 'e6', source: 'rabbitmq', target: 'celery' },
+            { id: 'e7', source: 'celery', target: 'postgres' },
         ]
     },
     'User-Blog Authentication API': {
         nodes: [
             {
-                id: 'client', type: 'custom', position: { x: 100, y: 0 },
+                id: 'client', type: 'custom', position: { x: 150, y: 0 },
                 data: { label: 'Client', sublabel: 'HTTP', icon: 'network', color: 'info', delay: 0 }
             },
             {
-                id: 'fastapi', type: 'custom', position: { x: 100, y: 70 },
-                data: { label: 'FastAPI', sublabel: 'REST', icon: 'api', color: 'primary', delay: 0.1 }
+                id: 'fastapi', type: 'custom', position: { x: 150, y: 90 },
+                data: { label: 'FastAPI', sublabel: 'REST API', icon: 'api', color: 'primary', delay: 0.1 }
             },
             {
-                id: 'jwt', type: 'custom', position: { x: 220, y: 70 },
+                id: 'jwt', type: 'custom', position: { x: 350, y: 90 },
                 data: { label: 'JWT', sublabel: 'OAuth2', icon: 'auth', color: 'danger', delay: 0.15 }
             },
             {
-                id: 'sqlalchemy', type: 'custom', position: { x: 100, y: 140 },
+                id: 'hash', type: 'custom', position: { x: 0, y: 180 },
+                data: { label: 'Bcrypt', sublabel: 'Password Hash', icon: 'auth', color: 'warning', delay: 0.2 }
+            },
+            {
+                id: 'sqlalchemy', type: 'custom', position: { x: 300, y: 180 },
                 data: { label: 'SQLAlchemy', sublabel: 'ORM', icon: 'code', color: 'accent', delay: 0.2 }
             },
             {
-                id: 'sqlite', type: 'custom', position: { x: 100, y: 210 },
-                data: { label: 'SQLite', sublabel: 'DB', icon: 'database', color: 'secondary', delay: 0.3 }
+                id: 'sqlite', type: 'custom', position: { x: 150, y: 270 },
+                data: { label: 'SQLite', sublabel: 'Database', icon: 'database', color: 'secondary', delay: 0.3 }
             },
             {
-                id: 'users', type: 'custom', position: { x: 20, y: 280 },
-                data: { label: 'Users', sublabel: 'Table', icon: 'user', color: 'info', delay: 0.4 }
-            },
-            {
-                id: 'blogs', type: 'custom', position: { x: 180, y: 280 },
-                data: { label: 'Blogs', sublabel: 'Table', icon: 'file', color: 'warning', delay: 0.4 }
+                id: 'crud', type: 'custom', position: { x: 150, y: 360 },
+                data: { label: 'CRUD', sublabel: 'Users + Blogs', icon: 'file', color: 'info', delay: 0.4 }
             },
         ],
         edges: [
             { id: 'e1', source: 'client', target: 'fastapi' },
             { id: 'e2', source: 'fastapi', target: 'jwt' },
-            { id: 'e3', source: 'fastapi', target: 'sqlalchemy' },
-            { id: 'e4', source: 'sqlalchemy', target: 'sqlite' },
-            { id: 'e5', source: 'sqlite', target: 'users' },
-            { id: 'e6', source: 'sqlite', target: 'blogs' },
+            { id: 'e3', source: 'fastapi', target: 'hash' },
+            { id: 'e4', source: 'fastapi', target: 'sqlalchemy' },
+            { id: 'e5', source: 'sqlalchemy', target: 'sqlite' },
+            { id: 'e6', source: 'sqlite', target: 'crud' },
+        ]
+    },
+    'Cyphire': {
+        nodes: [
+            {
+                id: 'client', type: 'custom', position: { x: 150, y: 0 },
+                data: { label: 'Credential', sublabel: 'Submit/Verify', icon: 'file', color: 'info', delay: 0 }
+            },
+            {
+                id: 'fastapi', type: 'custom', position: { x: 150, y: 90 },
+                data: { label: 'FastAPI', sublabel: 'REST Gateway', icon: 'api', color: 'primary', delay: 0.1 }
+            },
+            {
+                id: 'swagger', type: 'custom', position: { x: 350, y: 90 },
+                data: { label: 'Swagger', sublabel: 'OpenAPI Docs', icon: 'code', color: 'secondary', delay: 0.15 }
+            },
+            {
+                id: 'async', type: 'custom', position: { x: 0, y: 180 },
+                data: { label: 'Async Worker', sublabel: 'Tx Processing', icon: 'worker', color: 'accent', delay: 0.2 }
+            },
+            {
+                id: 'postgres', type: 'custom', position: { x: 300, y: 180 },
+                data: { label: 'PostgreSQL', sublabel: 'State Sync', icon: 'database', color: 'secondary', delay: 0.25 }
+            },
+            {
+                id: 'web3', type: 'custom', position: { x: 0, y: 270 },
+                data: { label: 'Web3.py', sublabel: 'Tx Validation', icon: 'code', color: 'accent', delay: 0.3 }
+            },
+            {
+                id: 'polygon', type: 'custom', position: { x: 300, y: 270 },
+                data: { label: 'Polygon', sublabel: 'Credential Anchor', icon: 'network', color: 'warning', delay: 0.35 }
+            },
+        ],
+        edges: [
+            { id: 'e1', source: 'client', target: 'fastapi' },
+            { id: 'e2', source: 'fastapi', target: 'swagger' },
+            { id: 'e3', source: 'fastapi', target: 'async' },
+            { id: 'e4', source: 'fastapi', target: 'postgres' },
+            { id: 'e5', source: 'async', target: 'web3' },
+            { id: 'e6', source: 'web3', target: 'polygon' },
+            { id: 'e7', source: 'postgres', target: 'polygon' },
         ]
     }
 };

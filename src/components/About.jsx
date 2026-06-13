@@ -67,10 +67,9 @@ const ThemeIcon = ({ theme }) => {
 const About = () => {
   const { theme } = useTheme()
 
-  // Calculate experience dynamically from start date (September 2025)
-  const startDate = new Date(2024, 8, 1) // September 2025 (month is 0-indexed)
-  const now = new Date()
-  const experienceMonths = Math.floor((now - startDate) / (1000 * 60 * 60 * 24 * 30))
+  const startDate = new Date(2025, 8, 1)
+  const endDate = new Date(2026, 5, 1)
+  const experienceMonths = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24 * 30))
 
   const stats = [
     { icon: FaBriefcase, value: experienceMonths, suffix: "+", label: "Months Experience" },
@@ -84,7 +83,7 @@ const About = () => {
         <h2
           className={`my-20 text-center [color:var(--text-primary)] ${DESIGN_CONFIG.HEADERS.H2}`}
         >
-          About Me
+          The Engineer
         </h2>
 
       </GsapReveal>

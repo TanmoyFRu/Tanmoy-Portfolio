@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 @font-face {
   font-family: "BL Melody";
@@ -25,25 +26,30 @@
   --font-body: "BL Melody", system-ui, sans-serif;
   --font-display: "BL Melody", "Sora", sans-serif;
   --font-name: "BL Melody", "Sora", sans-serif;
+  --font-heading: "Anton", sans-serif;
   font-family: var(--font-body);
 
   /* Midnight Theme (Refined) */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #121212;
+  --bg-primary: #050505;
+  --bg-secondary: #0c0c0c;
   --text-primary: #e5e5e5;
   --text-secondary: #a1a1aa;
   --accent: #6366f1;
   --accent-glow: rgba(99, 102, 241, 0.4);
-  --border-color: rgba(63, 63, 70, 0.4);
+  --border-color: rgba(63, 63, 70, 0.3);
   --selection-bg: rgba(99, 102, 241, 0.3);
   --selection-text: #c7d2fe;
 }
 
 h1,
-h2,
 h3 {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.04em;
 }
 
 [data-theme="solar"] {
@@ -333,4 +339,15 @@ html {
 .glow-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.hero-glow-card {
+  box-shadow:
+    0 0 40px -10px var(--accent),
+    0 0 80px -20px var(--accent-glow),
+    0 -20px 60px -15px var(--accent-glow),
+    0 20px 60px -15px var(--accent-glow),
+    -20px 0 60px -15px var(--accent-glow),
+    20px 0 60px -15px var(--accent-glow),
+    0 0 120px -30px var(--accent);
 }

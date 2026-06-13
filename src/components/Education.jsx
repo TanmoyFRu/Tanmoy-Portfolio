@@ -117,7 +117,7 @@ const Education = () => {
         <section id="education" ref={containerRef} className="relative py-24 border-t [border-color:var(--border-color)] overflow-hidden">
             <GsapReveal y={50}>
                 <h2 className={`mb-24 text-center [color:var(--text-primary)] ${DESIGN_CONFIG.HEADERS.H2}`}>
-                    My Education
+                    The Foundation
                 </h2>
             </GsapReveal>
 

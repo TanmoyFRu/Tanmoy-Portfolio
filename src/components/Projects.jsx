@@ -106,11 +106,11 @@ const Projects = () => {
           <h2
             className={`[color:var(--text-primary)] ${DESIGN_CONFIG.HEADERS.H2}`}
           >
-            Projects
+            What I Shipped
           </h2>
 
 
-          <p className="mt-4 text-lg md:text-xl [color:var(--text-secondary)] opacity-50 uppercase tracking-[0.5em] font-medium">Selected Personal Endeavors</p>
+          <p className="mt-4 text-lg md:text-xl [color:var(--text-secondary)] opacity-50 uppercase tracking-[0.5em] font-medium">Systems I Designed</p>
         </div>
       </GsapReveal>
 

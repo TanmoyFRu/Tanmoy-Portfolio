@@ -30,7 +30,7 @@ const Technologies = () => {
                 <h2
                     className={`my-20 text-center [color:var(--text-primary)] ${DESIGN_CONFIG.HEADERS.H2}`}
                 >
-                    Technologies
+                    Tech Arsenal
                 </h2>
 
             </GsapReveal>

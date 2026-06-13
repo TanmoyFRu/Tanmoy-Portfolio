@@ -1,4 +1,4 @@
-import { useRef, memo } from "react"
+import { memo } from "react"
 
 import { HERO_CONTENT } from "../constants"
 import { motion } from 'framer-motion'
@@ -6,25 +6,17 @@ import { TypeAnimation } from 'react-type-animation'
 import { useTheme } from "../context/ThemeContext"
 import Magnetic from "./Magnetic"
 import { useReducedMotion } from "../hooks/useReducedMotion"
-import { DESIGN_CONFIG } from "../constants/design"
-import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
+
 import GsapReveal from "./GsapReveal"
+import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 
-
-
-
-
-// Theme-specific decorative elements - optimized for performance
 const ThemeDecoration = ({ theme, isLowPerf }) => {
-  // Reduce elements on mobile/low-perf devices
   const elementCount = isLowPerf ? 5 : 15
   const particleCount = isLowPerf ? 4 : 10
   const starCount = isLowPerf ? 8 : 25
   const dotCount = isLowPerf ? 6 : 18
 
   if (isLowPerf) {
-    // Simplified static decorations for mobile/low-perf
     switch (theme) {
       case 'emerald':
         return (
@@ -55,7 +47,6 @@ const ThemeDecoration = ({ theme, isLowPerf }) => {
     }
   }
 
-  // Full animations for desktop
   switch (theme) {
     case 'emerald':
       return (
@@ -193,119 +184,75 @@ const ThemeDecoration = ({ theme, isLowPerf }) => {
 const Hero = () => {
   const { theme } = useTheme()
   const isLowPerf = useReducedMotion()
-  const heroRef = useRef(null)
-
-  useGSAP(() => {
-    if (isLowPerf) return
-
-    gsap.to(".hero-parallax", {
-      yPercent: -30,
-
-
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      }
-    })
-  }, { scope: heroRef, dependencies: [isLowPerf] })
 
   return (
-    <div ref={heroRef} className="pb-4 lg:mb-36 relative min-h-[50vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center">
-
+    <div className="relative">
       <ThemeDecoration theme={theme} isLowPerf={isLowPerf} />
 
-      <div className="flex flex-col items-center justify-center text-center relative z-10 px-4 pt-12 md:pt-0">
-        {/* Image Section - Commented Out
-        <div className="w-full lg:w-1/2">
-          <div className="flex justify-center lg:p-12">
-            <div className="relative group">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.5, delay: 1.8 }}
-                className="absolute -inset-1 bg-[color:var(--accent)] rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"
-              />
-              <motion.img
-                src={profilePicture}
-                alt="Tanmoy Debnath"
-                priority="true"
-                fetchPriority="high"
-                className="relative border border-stone-800/10 rounded-3xl grayscale-[0.2] brightness-[0.9] contrast-[1.1] sepia-[0.1] hover:grayscale-0 hover:brightness-100 transition-[filter,box-shadow,transform] duration-700 shadow-2xl w-[300px] md:w-[400px] lg:w-[500px] gpu-accel will-change-[filter]"
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-              />
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[color:color-mix(in_srgb,var(--accent),transparent_90%)] via-transparent to-[color:color-mix(in_srgb,var(--accent),transparent_95%)] pointer-events-none mix-blend-overlay" />
-            </div>
-          </div>
-        </div>
-        */}
-
-        <GsapReveal stagger={0.2} y={50}>
-          <div className="flex flex-col items-center max-w-5xl hero-parallax">
-
-
-            <h1
-              className={`[color:var(--text-primary)] leading-none text-center ${DESIGN_CONFIG.HEADERS.H1}`}
-              style={{
-                fontFamily: 'var(--font-name)',
-                textShadow: '0 4px 60px rgba(0,0,0,0.5)'
-              }}
-            >
-              Tanmoy{' '}
-              <span
+      <ContainerScroll
+        titleComponent={null}
+      >
+        <div className="relative h-full w-full flex flex-col items-center justify-center text-center px-4 md:px-8 py-6 md:py-10 overflow-y-auto">
+          <GsapReveal stagger={0.2} y={50}>
+            <div className="flex flex-col items-center max-w-4xl mx-auto">
+              <h1
+                className={`[color:var(--text-primary)] leading-none text-center text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter`}
                 style={{
-                  background: 'linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  fontFamily: 'var(--font-name)',
+                  textShadow: '0 4px 60px rgba(0,0,0,0.5)'
                 }}
               >
-                Debnath
-              </span>
-            </h1>
-            <div className="mt-8 h-[50px] md:h-[60px] lg:h-[80px]">
-              <TypeAnimation
-                sequence={[
-                  'Backend Developer',
-                  2000,
-                  'Automation Engineer',
-                  2000,
-                  'Problem Solver',
-                  2000
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-                className="block bg-gradient-to-r from-stone-300 to-stone-600 bg-clip-text text-2xl md:text-3xl lg:text-4xl tracking-tight text-transparent font-medium"
-                style={{ backgroundImage: 'linear-gradient(to right, var(--text-primary), var(--text-secondary))', fontFamily: 'var(--font-display)' }}
-              />
-            </div>
-            <p
-              className="my-6 max-w-3xl py-2 text-base md:text-lg lg:text-xl leading-relaxed tracking-tight [color:var(--text-secondary)] font-light"
-            >
-              {HERO_CONTENT}
-            </p>
-            <div>
-              <Magnetic>
-                <a
-                  href="/TanmoyDebnath_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download
-                  className="rounded-full px-8 md:px-10 py-3 md:py-4 text-sm md:text-base font-semibold transition-all duration-300 shadow-xl active:scale-95 [background-color:var(--text-primary)] [color:var(--bg-primary)] hover:[background-color:var(--accent)] hover:text-white inline-block cursor-none"
+                Tanmoy{' '}
+                <span
+                  style={{
+                    background: 'linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
                 >
-                  Download Resume
-                </a>
-              </Magnetic>
+                  Debnath
+                </span>
+              </h1>
+              <div className="mt-4 md:mt-6 h-[40px] md:h-[50px]">
+                <TypeAnimation
+                  sequence={[
+                    'Backend Developer',
+                    2000,
+                    'Automation Engineer',
+                    2000,
+                    'Problem Solver',
+                    2000
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                  className="block bg-gradient-to-r from-stone-300 to-stone-600 bg-clip-text text-xl md:text-2xl lg:text-3xl tracking-tight text-transparent font-medium"
+                  style={{ backgroundImage: 'linear-gradient(to right, var(--text-primary), var(--text-secondary))', fontFamily: 'var(--font-display)' }}
+                />
+              </div>
+              <p
+                className="my-4 max-w-2xl py-1 text-sm md:text-base lg:text-lg leading-relaxed tracking-tight [color:var(--text-secondary)] font-light"
+              >
+                {HERO_CONTENT}
+              </p>
+              <div>
+                <Magnetic>
+                  <a
+                    href="/TanmoyDebnath_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="rounded-full px-8 md:px-10 py-3 md:py-4 text-sm md:text-base font-semibold transition-all duration-300 shadow-xl active:scale-95 [background-color:var(--text-primary)] [color:var(--bg-primary)] hover:[background-color:var(--accent)] hover:text-white inline-block cursor-none"
+                  >
+                    Download Resume
+                  </a>
+                </Magnetic>
+              </div>
             </div>
-          </div>
-        </GsapReveal>
-
-      </div>
+          </GsapReveal>
+        </div>
+      </ContainerScroll>
     </div>
   )
 }
