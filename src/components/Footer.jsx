@@ -199,9 +199,11 @@ const NebulaEffect = ({ reduced }) => {
 // Simple Solar Glow for mobile (no WebGL)
 const SolarGlow = () => (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[200%] h-80 rounded-[100%] bg-gradient-to-b from-orange-400/30 via-yellow-300/20 to-transparent blur-3xl" />
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/20 rounded-full blur-[100px]" />
-        <div className="absolute top-10 right-1/4 w-48 h-48 bg-yellow-400/15 rounded-full blur-[80px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[200%] h-96 rounded-[100%] bg-gradient-to-b from-amber-500/20 via-orange-400/12 to-transparent blur-2xl" />
+        <div className="absolute top-0 left-[10%] w-80 h-80 bg-orange-400/15 rounded-full blur-[100px]" />
+        <div className="absolute top-10 right-[15%] w-64 h-64 bg-yellow-500/12 rounded-full blur-[80px]" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-600/20 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-600/30 to-transparent" />
     </div>
 )
 
@@ -249,6 +251,117 @@ const LightRaysWrapper = ({ reduced }) => {
     )
 }
 
+const CYBER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*!"
+const TARGET = "TANMOY"
+
+const THEME_STYLES = {
+    midnight: { stroke: "#818cf8", glow: "rgba(99, 102, 241, 0.3)" },
+    solar: { stroke: "#b45309", glow: "rgba(180, 113, 9, 0.25)" },
+    cosmic: { stroke: "#c084fc", glow: "rgba(192, 132, 252, 0.3)" },
+    emerald: { stroke: "#34d399", glow: "rgba(52, 211, 153, 0.3)" },
+}
+
+const CyberText = ({ theme }) => {
+    const containerRef = useRef(null)
+    const [displayText, setDisplayText] = useState(TARGET.split(""))
+    const [glitchIndex, setGlitchIndex] = useState(-1)
+    const intervalsRef = useRef([])
+    const hasPlayedRef = useRef(false)
+
+    const cleanup = () => {
+        intervalsRef.current.forEach(clearInterval)
+        intervalsRef.current = []
+    }
+
+    useEffect(() => {
+        const el = containerRef.current
+        if (!el) return
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting && !hasPlayedRef.current) {
+                hasPlayedRef.current = true
+                runScramble()
+            }
+        }, { threshold: 0.1 })
+
+        observer.observe(el)
+        return () => { observer.disconnect(); cleanup() }
+    }, [])
+
+    const runScramble = () => {
+        cleanup()
+        let resolved = 0
+
+        const scrambleId = setInterval(() => {
+            setDisplayText(
+                TARGET.split("").map((ch, i) =>
+                    i < resolved ? ch : CYBER_CHARS[Math.floor(Math.random() * CYBER_CHARS.length)]
+                )
+            )
+        }, 50)
+        intervalsRef.current.push(scrambleId)
+
+        const resolveId = setInterval(() => {
+            resolved++
+            if (resolved > TARGET.length) {
+                clearInterval(scrambleId)
+                clearInterval(resolveId)
+                setDisplayText(TARGET.split(""))
+
+                const glitchId = setInterval(() => {
+                    const idx = Math.floor(Math.random() * TARGET.length)
+                    setGlitchIndex(idx)
+                    setTimeout(() => setGlitchIndex(-1), 120)
+                }, 800)
+                intervalsRef.current.push(glitchId)
+
+                const restartId = setTimeout(() => {
+                    setGlitchIndex(-1)
+                    runScramble()
+                }, 4000)
+                intervalsRef.current.push(restartId)
+            }
+        }, 250)
+        intervalsRef.current.push(resolveId)
+    }
+
+    const isSolar = theme === "solar"
+    const ts = THEME_STYLES[theme] || THEME_STYLES.midnight
+
+    return (
+        <div
+            ref={containerRef}
+            className="absolute bottom-0 left-0 right-0 pointer-events-none select-none z-0 hidden md:flex justify-center overflow-hidden"
+        >
+            <div
+                className="text-[14vw] font-black tracking-[0.08em] whitespace-nowrap leading-[0.75] text-center"
+                style={{
+                    fontFamily: "'Orbitron', sans-serif",
+                    opacity: isSolar ? 0.18 : 0.12,
+                    WebkitTextFillColor: "transparent",
+                    WebkitTextStroke: `2px ${ts.stroke}`,
+                    paintOrder: "stroke fill",
+                    textShadow: `0 0 40px ${ts.glow}, 0 0 80px ${ts.glow}`,
+                }}
+            >
+                {displayText.map((char, i) => (
+                    <span
+                        key={i}
+                        style={{
+                            display: "inline-block",
+                            opacity: glitchIndex === i ? 0.3 : 1,
+                            transform: glitchIndex === i ? `translateY(${Math.random() > 0.5 ? 4 : -4}px) scaleX(${Math.random() > 0.5 ? 1.05 : 0.95})` : "none",
+                            transition: "opacity 0.05s, transform 0.05s",
+                        }}
+                    >
+                        {char}
+                    </span>
+                ))}
+            </div>
+        </div>
+    )
+}
+
 const Footer = () => {
     const { theme } = useTheme()
     const currentYear = new Date().getFullYear()
@@ -273,7 +386,7 @@ const Footer = () => {
         switch (theme) {
             case 'emerald': return <MatrixRain reduced={reduced} />
             case 'midnight': return <StarField reduced={reduced} />
-            case 'solar': return <LightRaysWrapper reduced={reduced} />
+            case 'solar': return <SolarGlow />
             case 'cosmic': return <NebulaEffect reduced={reduced} />
             default: return <StarField reduced={reduced} />
         }
@@ -361,21 +474,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Large Background Text */}
-            <div
-                className="absolute bottom-0 left-0 right-0 pointer-events-none select-none z-0 hidden md:flex justify-center overflow-hidden"
-            >
-                <span
-                    className="text-[14vw] font-black tracking-tighter whitespace-nowrap leading-[0.75] text-center"
-                    style={{
-                        color: isSolar ? 'rgba(0, 0, 0, 1)' : 'var(--text-primary)',
-                        opacity: isSolar ? 0.03 : 0.02,
-                        textShadow: isSolar ? 'none' : '0 0 50px rgba(0,0,0,0.5)' // add depth for dark mode
-                    }}
-                >
-                    TANMOY
-                </span>
-            </div>
+            <CyberText theme={theme} />
 
             <div className="relative z-20 border-t [border-color:var(--border-color)] bg-[rgba(var(--bg-primary),0.8)] backdrop-blur-sm">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-5 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3">
